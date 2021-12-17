@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.databinding.FragmentMainBinding
@@ -102,18 +103,22 @@ class PictureOfTheDayFragment : Fragment() {
                 val url = pictureOfTheDayResponseData.url
                 val title = pictureOfTheDayResponseData.title
                 val date = pictureOfTheDayResponseData.date
+                val description = pictureOfTheDayResponseData.explanation
+
                 binding.imageView.load(url) {
                     lifecycle(this@PictureOfTheDayFragment)
                     error(R.drawable.ic_load_error_vector)
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
                 binding.titleView.text = title + "\n" + date
-
+                binding.includeBottomSheet.bottomSheetDescriptionHeader.text = title
+                binding.includeBottomSheet.bottomSheetDescription.text = description
             }
         }
     }
 
     private fun setBottomAppBar() {
+        val behavior = BottomSheetBehavior.from(binding.includeBottomSheet.bottomSheetContainer)
         val context = activity as MainActivity
         context.setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
@@ -121,12 +126,14 @@ class PictureOfTheDayFragment : Fragment() {
         binding.fab.setOnClickListener {
             if (isMain) {
                 isMain = false
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
+                behavior.state = BottomSheetBehavior.STATE_HIDDEN
                 binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
