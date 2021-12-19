@@ -4,44 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.chips.ChipsFragment">
+    tools:context=".ui.settings.SettingsFragment">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="match_parent"
+    <com.google.android.material.chip.Chip
+        android:id="@+id/darkTheme"
+        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipForDelete"
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Entry" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choice" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Action" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filter" />
-    </com.google.android.material.chip.ChipGroup>
-
+        android:text="@string/dark_theme"
+        android:textSize="@dimen/def_text_size_for_titles" />
 </LinearLayout>

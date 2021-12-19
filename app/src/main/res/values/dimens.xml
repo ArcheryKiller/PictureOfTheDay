@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="defMarginTop">10dp</dimen>
-    <dimen name="defPaddingVertical">10dp</dimen>
+    <dimen name="def_padding">10dp</dimen>
+    <dimen name="def_margin_top_id_titleView">10dp</dimen>
+    <dimen name="def_padding_vertical_id_inputLayout">10dp</dimen>
+    <dimen name="def_text_size_for_titles">20sp</dimen>
+    <dimen name="margin_top_id_bottom_sheet_description_header">10dp</dimen>
+    <dimen name="margin_top_id_bottom_sheet_description">10dp</dimen>
+    <dimen name="text_size_description_id_bottom_sheet_description">25sp</dimen>
 </resources>

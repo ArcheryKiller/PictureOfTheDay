@@ -13,7 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <!-- Скрытие статус бара -->
+    </style>
+    
+    <style name="SpaceTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimary">@color/space_blue</item>
+        <item name="colorSecondary">@color/space_lite_blue</item>
+    </style>
+
+    <style name="BackgroundFragmentStyle">
+        <item name="android:padding">@dimen/def_padding</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="BackgroundBottomAppBarTheme">
+        <item name="android:backgroundTint">@color/space_blue</item>
     </style>
 </resources>

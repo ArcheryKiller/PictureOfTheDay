@@ -12,4 +12,7 @@
     <string name="reload">Перезагрузите</string>
     <string name="error">Ошибка</string>
     <string name="error404">Страница не найдена</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="Enable_dark_theme">Enable dark theme</string>
+    <string name="Enable_light_theme">Enable light theme</string>
 </resources>
