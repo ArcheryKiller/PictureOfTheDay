@@ -19,8 +19,8 @@ import com.google.android.material.snackbar.Snackbar
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.databinding.FragmentMainBinding
 import pavel.ivanov.pictureoftheday.ui.MainActivity
-import pavel.ivanov.pictureoftheday.ui.chips.ChipsFragment
 import pavel.ivanov.pictureoftheday.ui.drawer.BottomNavigationDrawerFragment
+import pavel.ivanov.pictureoftheday.ui.settings.SettingsFragment
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayState
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayViewModel
 
@@ -29,6 +29,7 @@ class PictureOfTheDayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var isMain = true
+    private var backPressedTime = 0L;
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -72,7 +73,7 @@ class PictureOfTheDayFragment : Fragment() {
                 requireActivity()
                     .supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, ChipsFragment.newInstance())
+                    .replace(R.id.container, SettingsFragment.newInstance())
                     .commit()
             }
             android.R.id.home -> {
@@ -146,10 +147,21 @@ class PictureOfTheDayFragment : Fragment() {
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     Log.d(TAG, "Fragment back pressed")
+
                     if (isMain) {
-                        requireActivity().onBackPressed()
+                        val t = System.currentTimeMillis()
+                        if (t - backPressedTime > 2000) {    // 2 secs
+                            backPressedTime = t
+                            Toast.makeText(
+                                context, "Press back again to exit",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            requireActivity().onBackPressed()
+                        }
                     } else {
                         isMain = true
+                        behavior.state = BottomSheetBehavior.STATE_HIDDEN
                         binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                         binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                         binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
