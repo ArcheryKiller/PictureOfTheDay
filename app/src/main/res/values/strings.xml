@@ -15,4 +15,7 @@
     <string name="dark_theme">Dark theme</string>
     <string name="Enable_dark_theme">Enable dark theme</string>
     <string name="Enable_light_theme">Enable light theme</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="day_before_yesterday">Позавчера</string>
 </resources>

@@ -1,7 +1,7 @@
 package pavel.ivanov.pictureoftheday.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.ui.picture.PictureOfTheDayFragment
 

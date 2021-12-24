@@ -9,20 +9,29 @@ import android.view.*
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import coil.load
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.databinding.FragmentMainBinding
 import pavel.ivanov.pictureoftheday.ui.MainActivity
+import pavel.ivanov.pictureoftheday.ui.adapter.ViewPagerAdapter
 import pavel.ivanov.pictureoftheday.ui.drawer.BottomNavigationDrawerFragment
+import pavel.ivanov.pictureoftheday.ui.picture.fragmentsoftheday.TodayFragment
 import pavel.ivanov.pictureoftheday.ui.settings.SettingsFragment
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayState
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -35,12 +44,36 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding.pictureOfTheDayViewPager.adapter = ViewPagerAdapter(requireActivity())
+
+        TabLayoutMediator(binding.tabLayout, binding.pictureOfTheDayViewPager){ tab, position -> }.attach()
+        binding.tabLayout.getTabAt(0)?.setText(R.string.day_before_yesterday)
+        binding.tabLayout.getTabAt(1)?.setText(R.string.yesterday)
+        binding.tabLayout.getTabAt(2)?.setText(R.string.today)
+
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.pictureOfTheDayViewPager.setCurrentItem(2, false)
+
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
-        viewModel.sendServerRequest()
+
+        when (binding.pictureOfTheDayViewPager.currentItem) {
+            0 -> viewModel.sendServerRequest(takeDate(-2))
+            1 -> viewModel.sendServerRequest(takeDate(-1))
+            2 -> viewModel.sendServerRequest(takeDate(0))
+        }
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -48,15 +81,6 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
         setBottomAppBar()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,29 +115,33 @@ class PictureOfTheDayFragment : Fragment() {
     private fun renderData(state: PictureOfTheDayState) {
         when(state) {
             is PictureOfTheDayState.Error -> {
+
+                binding.pictureOfTheDayViewPager.isVisible = false
+                binding.fragmentMainLoadingLayout.isVisible = false
+
                 Snackbar
                     .make(binding.main, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
                     .setAction(getString(R.string.reload)) { viewModel.getData() }
                     .show()
             }
             is PictureOfTheDayState.Loading -> {
-                binding.imageView.load(R.drawable.ic_no_photo_vector)
+
+                binding.pictureOfTheDayViewPager.isVisible = false
+                binding.fragmentMainLoadingLayout.isVisible = true
+
             }
             is PictureOfTheDayState.Success -> {
+
+                binding.pictureOfTheDayViewPager.isVisible = true
+                binding.fragmentMainLoadingLayout.isVisible = false
+
                 val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
-                val url = pictureOfTheDayResponseData.url
                 val title = pictureOfTheDayResponseData.title
-                val date = pictureOfTheDayResponseData.date
                 val description = pictureOfTheDayResponseData.explanation
 
-                binding.imageView.load(url) {
-                    lifecycle(this@PictureOfTheDayFragment)
-                    error(R.drawable.ic_load_error_vector)
-                    placeholder(R.drawable.ic_no_photo_vector)
-                }
-                binding.titleView.text = title + "\n" + date
                 binding.includeBottomSheet.bottomSheetDescriptionHeader.text = title
                 binding.includeBottomSheet.bottomSheetDescription.text = description
+
             }
         }
     }
@@ -169,6 +197,20 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        if (count == 0) {
+            return "null"
+        }
+
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        format.timeZone = TimeZone.getTimeZone("EST")
+
+        return format.format(currentDate.time)
     }
 
     companion object {

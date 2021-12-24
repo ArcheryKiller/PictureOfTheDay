@@ -3,7 +3,6 @@ package pavel.ivanov.pictureoftheday.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
 import pavel.ivanov.pictureoftheday.BuildConfig
 import pavel.ivanov.pictureoftheday.repository.PictureOfTheDayResponseData
 import pavel.ivanov.pictureoftheday.repository.PictureOfTheDayRetrofitImpl
@@ -18,17 +17,6 @@ class PictureOfTheDayViewModel(
 ) : ViewModel() {
     fun getData(): LiveData<PictureOfTheDayState> {
         return liveDataForViewToObserve
-    }
-
-    fun sendServerRequest(){
-        liveDataForViewToObserve.value = PictureOfTheDayState.Loading(0)
-        val apiKey: String = BuildConfig.NASA_API_KEY
-
-        if (apiKey.isBlank()) {
-            liveDataForViewToObserve.value = PictureOfTheDayState.Error(Throwable("wrong key"))
-        } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(callback)
-        }
     }
 
     private val callback = object : Callback<PictureOfTheDayResponseData> {
@@ -52,5 +40,19 @@ class PictureOfTheDayViewModel(
 
         }
 
+    }
+
+    fun sendServerRequest(date: String){
+        liveDataForViewToObserve.value = PictureOfTheDayState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+
+        if (apiKey.isBlank()) {
+            liveDataForViewToObserve.value = PictureOfTheDayState.Error(Throwable("wrong key"))
+        } else {
+            if (date == "null") {
+                retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, "").enqueue(callback)
+            }
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, date).enqueue(callback)
+        }
     }
 }
