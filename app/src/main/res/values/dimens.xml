@@ -6,5 +6,6 @@
     <dimen name="def_text_size_for_titles">20sp</dimen>
     <dimen name="margin_top_id_bottom_sheet_description_header">10dp</dimen>
     <dimen name="margin_top_id_bottom_sheet_description">10dp</dimen>
-    <dimen name="text_size_description_id_bottom_sheet_description">25sp</dimen>
+    <dimen name="text_size_description_id_bottom_sheet_description">15sp</dimen>
+    <dimen name="def_margin_top">20dp</dimen>
 </resources>

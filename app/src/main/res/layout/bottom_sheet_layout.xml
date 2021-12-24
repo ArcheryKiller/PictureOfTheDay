@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top_id_bottom_sheet_description_header"
-        android:textStyle="bold"
+        android:fontFamily="@font/space_runner_twotone_italic"
         android:textSize="@dimen/def_text_size_for_titles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,7 @@
             android:id="@+id/bottom_sheet_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:paddingBottom="30dp"
+            android:fontFamily="@font/space_runner_3d_italic"
             android:textSize="@dimen/text_size_description_id_bottom_sheet_description" />
     </ScrollView>
 
