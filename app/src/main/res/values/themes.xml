@@ -22,6 +22,10 @@
         <item name="colorSecondary">@color/space_lite_blue</item>
     </style>
 
+    <style name="SpaceThemForToolBar">
+        <item name="fontFamily">@font/space_runner_twotone_italic</item>
+    </style>
+
     <style name="BackgroundFragmentStyle">
         <item name="android:padding">@dimen/def_padding</item>
         <item name="android:background">@color/white</item>
