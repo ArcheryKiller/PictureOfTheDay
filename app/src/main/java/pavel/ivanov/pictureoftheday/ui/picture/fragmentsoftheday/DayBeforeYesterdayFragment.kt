@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.snackbar.Snackbar
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.databinding.FragmentOfTheDayBinding
+import pavel.ivanov.pictureoftheday.ui.utils.Animation
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayState
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
@@ -19,6 +19,8 @@ import java.util.*
 class DayBeforeYesterdayFragment : Fragment() {
     private var _binding: FragmentOfTheDayBinding? = null
     private val binding get() = _binding!!
+
+    private val imageAnimation = Animation()
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -70,6 +72,7 @@ class DayBeforeYesterdayFragment : Fragment() {
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
                 binding.titleView.text = title + "\n" + date
+                imageAnimation.animatePicture(binding)
             }
         }
     }
