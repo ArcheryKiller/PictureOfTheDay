@@ -4,8 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/arche/.gradle/caches/transforms-3/eb80740f1dfca68fbba69852f8ce6331/transformed/material-1.4.0/res/drawable/ic_mtrl_chip_checked_black.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/drawable/bg_earth.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/drawable/bg_mars.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout-notnight/bottom_sheet_layout.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/activity_main.xml" value="0.11778115501519756" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/activity_recycler_item_earth.xml" value="0.2421875" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/activity_recycler_item_header.xml" value="0.2421875" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/activity_recycler_item_mars.xml" value="0.2421875" />
+        <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/activity_recycler_list.xml" value="0.2421875" />
         <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/bottom_navigator_layout.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.2" />
         <entry key="..\:/Users/arche/Desktop/Programming/PictureOfTheDay/app/src/main/res/layout/fragment_chips.xml" value="0.264" />
