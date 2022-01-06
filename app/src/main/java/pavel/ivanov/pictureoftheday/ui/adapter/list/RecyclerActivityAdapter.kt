@@ -174,12 +174,12 @@ class RecyclerActivityAdapter(
         }
 
         private fun moveUp() {
-            if (layoutPosition > 0) {
+            if (layoutPosition > 1) {
                 data.removeAt(layoutPosition).apply {
                     data.add(layoutPosition - 1, this)
                 }
+                notifyItemMoved(layoutPosition, layoutPosition - 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition - 1)
         }
 
         private fun moveDown() {
@@ -187,8 +187,8 @@ class RecyclerActivityAdapter(
                 data.removeAt(layoutPosition).apply {
                     data.add(layoutPosition + 1, this)
                 }
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition + 1)
         }
 
         private fun addItemToPosition() {
