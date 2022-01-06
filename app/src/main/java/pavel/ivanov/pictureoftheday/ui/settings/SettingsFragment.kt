@@ -11,20 +11,20 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import pavel.ivanov.pictureoftheday.R
-import pavel.ivanov.pictureoftheday.databinding.FragmentChipsBinding
+import pavel.ivanov.pictureoftheday.databinding.FragmentSettingsBinding
 import pavel.ivanov.pictureoftheday.ui.picture.PictureOfTheDayFragment
 
 
 class SettingsFragment : Fragment() {
 
-    private var _binding: FragmentChipsBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChipsBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val currentNightMode = (resources.configuration.uiMode
                 and Configuration.UI_MODE_NIGHT_MASK)

@@ -25,6 +25,7 @@ import pavel.ivanov.pictureoftheday.ui.MainActivity
 import pavel.ivanov.pictureoftheday.ui.adapter.ViewPagerAdapter
 import pavel.ivanov.pictureoftheday.ui.drawer.BottomNavigationDrawerFragment
 import pavel.ivanov.pictureoftheday.ui.settings.SettingsFragment
+import pavel.ivanov.pictureoftheday.ui.utils.Animation
 import pavel.ivanov.pictureoftheday.ui.utils.Behavior
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayState
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayViewModel
@@ -34,6 +35,8 @@ import java.util.*
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentMainStartMotionBinding? = null
     private val binding get() = _binding!!
+
+    private val imageAnimation = Animation()
 
     private var isMain = true
     private var backPressedTime = 0L;
@@ -142,7 +145,7 @@ class PictureOfTheDayFragment : Fragment() {
                     error(R.drawable.ic_load_error_vector)
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
-
+                imageAnimation.animatePicture(binding.includeBottomSheet)
             }
         }
     }
