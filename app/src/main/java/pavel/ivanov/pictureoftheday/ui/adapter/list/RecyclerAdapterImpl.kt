@@ -22,13 +22,7 @@ class RecyclerAdapterImpl : AppCompatActivity() {
 
         val data = arrayListOf(
             Data(0,"Earth", type = TYPE_EARTH) to false,
-            Data(1,"Mars", "", type = TYPE_MARS) to false/*,
-            Data("Earth", type = TYPE_EARTH),
-            Data("Mars", "", type = TYPE_MARS),
-            Data("Earth", type = TYPE_EARTH),
-            Data("Earth", type = TYPE_EARTH),
-            Data("Earth", type = TYPE_EARTH),
-            Data("Mars", null, type = TYPE_MARS)*/
+            Data(1,"Mars", "", type = TYPE_MARS) to false
         )
         data.add(0, Data(3,"Заголовок", type = TYPE_HEADER) to false)
 

@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.databinding.FragmentOfTheDayBinding
 import pavel.ivanov.pictureoftheday.ui.utils.Animation
+import pavel.ivanov.pictureoftheday.ui.utils.Span
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayState
 import pavel.ivanov.pictureoftheday.viewmodel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
@@ -21,6 +22,7 @@ class DayBeforeYesterdayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val imageAnimation = Animation()
+    private val span = Span()
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -71,7 +73,7 @@ class DayBeforeYesterdayFragment : Fragment() {
                     error(R.drawable.ic_load_error_vector)
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
-                binding.titleView.text = title + "\n" + date
+                binding.titleView.text = span.initSpan(title!!, date!!, requireContext())
                 imageAnimation.animatePicture(binding)
             }
         }
