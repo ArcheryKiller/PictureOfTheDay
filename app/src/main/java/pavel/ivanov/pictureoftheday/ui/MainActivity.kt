@@ -6,6 +6,7 @@ import pavel.ivanov.pictureoftheday.R
 import pavel.ivanov.pictureoftheday.ui.picture.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
